@@ -12,7 +12,9 @@ app/agent.py や app/tools.py のファイルは書き換えず、実行時に�
 結果は画面に出し、lectures/03/experiments/ に Markdown で保存する。
 無料枠のレート制限に当たらないよう、実行の間に待ち時間（--wait 秒）を入れる。
 """
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import argparse
 import inspect
 import time
