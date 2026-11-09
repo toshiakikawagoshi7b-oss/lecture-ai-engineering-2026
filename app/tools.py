@@ -5,10 +5,14 @@
 """
 
 import json
+import random
+import re
+from datetime import datetime
 from functools import cache
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+LOG_DIR = Path(__file__).resolve().parent.parent / "learning_log"
 MAX_RESULTS = 3
 
 
@@ -77,3 +81,39 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+def make_quiz(lecture: int) -> str:
+    """指定した回（1始まりの整数）の用語から確認問題を1問作り、問題と答えをJSONで返す。
+
+    「第2回の確認問題を出して」「理解度をチェックしたい」のように、
+    復習や確認のための問題を求められたときに使う。
+    返ってきた answer は、利用者が答えるまで見せずに、まず question だけを出題すること。
+    """
+    terms = [e for e in load_glossary() if e["lecture"] == lecture]
+    if not terms:
+        lectures = sorted({e["lecture"] for e in load_glossary()})
+        return f"第{lecture}回の用語は用語集にありません。問題を作れる回: {', '.join(map(str, lectures))}"
+    e = random.choice(terms)
+    return json.dumps(
+        {"question": f"「{e['term']}」の意味は？", "answer": e["definition"], "lecture": lecture},
+        ensure_ascii=False,
+    )
+
+
+def save_learning_log(title: str, content: str) -> str:
+    """学習の記録（学んだこと・疑問・次にやること）を learning_log/ フォルダに Markdown で保存する。
+
+    利用者が「学習ログに保存して」「今日の学びを記録して」のように、記録の保存を
+    はっきり求めたときだけ使う。title は記録の短い題名（例: "第3回 エージェント"）、
+    content は保存する本文（箇条書きの Markdown）。
+    ファイルを書き込む操作なので、実行前に利用者の承認を求める。
+    """
+    if not title.strip() or not content.strip():
+        return "title と content の両方を指定してください。保存はしていません。"
+    LOG_DIR.mkdir(exist_ok=True)
+    # ファイル名に使えない文字を除き、日時を付けて上書きを防ぐ
+    slug = re.sub(r'[\\/:*?"<>|\s]+', "_", title.strip())[:40]
+    path = LOG_DIR / f"{datetime.now():%Y%m%d_%H%M%S}_{slug}.md"
+    path.write_text(f"# {title.strip()}\n\n{content.strip()}\n", encoding="utf-8")
+    return f"保存しました: learning_log/{path.name}"
