@@ -1,0 +1,19 @@
+[model] gemini-3.5-flash-lite
+[mode] vector / RAG_TOP_K = 2
+[question] 今回作ったRAGの実測平均応答時間と正答率を教えてください
+
+第1〜3回の講義資料を確認しましたが、今回作成したRAGの実測平均応答時間や正答率に関する数値は記載されていませんでした。
+
+そのため、現在の資料から正確な数値を確認することはできません（第2回資料では、LLMの出力は確率で変わるため「同じ質問を複数回聞いてばらつきごと測る」必要があることや、5回中3回正しいといった説明用の例示は記載されていますが、特定のRAG実装における実測値はありません。第2回・PDF p.13）。
+
+--- trace ---
+[tool call]   search_materials({'query': 'RAG 実測平均応答時間 正答率'})
+[tool return] search_materials -> {"results": [{"page_id": "lec02-main-p013", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "s…
+[time] 回答完了まで 2.24 秒（検索・埋め込みを含む）
+[usage] 入力 1,633 tokens / 出力 141 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.000842 USD（埋め込み・索引構築分は含まない）
+
+--- ツールが返したページ（本文つき）---
+1. search_materials({"query": "RAG 実測平均応答時間 正答率"})
+     第2回 p.13 帰結①：同じ質問でも、答えは毎回変わる / distance=0.2925
+     第3回 p.64 補足：長時間タスクの実行能力の最新動向 / distance=0.3155

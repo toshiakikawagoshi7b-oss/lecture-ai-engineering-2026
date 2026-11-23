@@ -1,0 +1,480 @@
+{
+  "ex_full": {
+    "mode": "full",
+    "question": "第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 5,
+    "answer": "ご質問ありがとうございます。\n\nLoRA（ローラ）およびQLoRA（キューローラ）における学習対象と追加要素については、以下の資料に記載されています。\n\n- **LoRAが固定し学習するもの**: \n  資料「lec02-main / 基盤モデルの仕組み」の**PDF p.52**に説明があります。本体の重み $W$ は固定して学習せず、細長い2つの小さな行列（差分を表す小さな行列 $A$ と $B$）の積（低ランク）だけを学習します。\n- **QLoRAが加えるもの**: \n  同じく**PDF p.52**（およびp.51）に説明があります。QLoRAは、LoRAの仕組みに加えて**「元の重みを4bitに圧縮する」**処理を加えます。\n\n宿題を進める際の考え方のヒントとして、大きなモデルのパラメータ全体を更新するのではなく、こうした小さな差分や圧縮を組み合わせることで、手元のGPU環境でも効率的に微調整ができるという点に着目してみてください。",
+    "seconds": 2.17,
+    "input_tokens": 117025,
+    "output_tokens": 228,
+    "requests": 1,
+    "cost_usd": 0.00472146,
+    "tool_calls": []
+  },
+  "ex_search_k5": {
+    "mode": "search",
+    "question": "LoRA QLoRA 違い",
+    "rag_top_k": 5,
+    "pages": [
+      {
+        "lecture": 2,
+        "page": 52,
+        "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる",
+        "distance": 0.2205
+      },
+      {
+        "lecture": 2,
+        "page": 51,
+        "title": "PEFT ：モデル全体ではなく、一部だけを学習する",
+        "distance": 0.2484
+      },
+      {
+        "lecture": 2,
+        "page": 60,
+        "title": "今日の演習： QLoRA で出力形式を矯正し、効果を測る",
+        "distance": 0.2853
+      },
+      {
+        "lecture": 2,
+        "page": 47,
+        "title": "根拠と諸説：知識の追加は RAG が効きやすい",
+        "distance": 0.3187
+      },
+      {
+        "lecture": 2,
+        "page": 61,
+        "title": "演習の進め方と提出物（仮）",
+        "distance": 0.3269
+      }
+    ]
+  },
+  "q1_vector_k5": {
+    "mode": "vector",
+    "question": "第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 5,
+    "answer": "講義資料によると、LoRAおよびQLoRAの仕組みについて以下のように説明されています。\n\n* **LoRAは何を固定し、何を学習するか**\n  * 元の重みは固定（学習しない）し、低ランクの小さな行列（細長い2つの行列の積で表される変化分や追加部分）だけを学習します。（第2回・PDF p.51, 52）\n* **QLoRAは何を加えるか**\n  * LoRAの手法に加えて、**「元の重みを4bitに圧縮（数値を粗く保存）」**する仕組みを組み合わせて加えます。（第2回・PDF p.51, 52）",
+    "seconds": 2.64,
+    "input_tokens": 3027,
+    "output_tokens": 171,
+    "requests": 2,
+    "cost_usd": 0.0013356,
+    "tool_calls": [
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "LoRA QLoRA 固定 学習"
+        },
+        "pages": [
+          {
+            "lecture": 2,
+            "page": 52,
+            "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる",
+            "distance": 0.2297
+          },
+          {
+            "lecture": 2,
+            "page": 51,
+            "title": "PEFT ：モデル全体ではなく、一部だけを学習する",
+            "distance": 0.2436
+          },
+          {
+            "lecture": 2,
+            "page": 60,
+            "title": "今日の演習： QLoRA で出力形式を矯正し、効果を測る",
+            "distance": 0.2672
+          },
+          {
+            "lecture": 2,
+            "page": 61,
+            "title": "演習の進め方と提出物（仮）",
+            "distance": 0.293
+          },
+          {
+            "lecture": 2,
+            "page": 47,
+            "title": "根拠と諸説：知識の追加は RAG が効きやすい",
+            "distance": 0.2932
+          }
+        ]
+      }
+    ]
+  },
+  "ex_tree": {
+    "mode": "tree",
+    "question": "第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 5,
+    "answer": "第2回の講義資料によると、LoRAとQLOARの仕組みや学習・固定する部分は以下のとおりです。\n\n* **LoRA（Low-Rank Adaptation）**\n  * **固定するもの：** 元のモデルの重み ($W$) はそのまま固定し、学習しません（第2回・PDF p.52）。\n  * **学習するもの：** 追加した小さくて細長い2つの行列（低ランクの差分を表すパラメータ $A$ と $B$）だけを学習します（第2回・PDF p.52）。\n\n* **QLoRA（Quantized LoRA）**\n  * **加えるもの：** LoRAの手法に加えて、元の重みを **4bitに量子化（圧縮）** してメモリ使用量を抑える工夫を加えます（第2回・PDF p.52）。これにより、GPU 1台（Colabなどの限られた環境）でも大きなモデルの微調整が可能になります（第2回・PDF p.52）。\n\n本や講義のイメージとしては、巨大なモデル本体（青い部分）は一切変更せず固定したうえで、薄い「付箋」のような小さな追加パラメータ（橙色の行列）だけを学習するのがLoRAであり、そのベースをさらに4bitに圧縮するのがQLoRAとなります（第2回・PDF p.52）。",
+    "seconds": 5.1,
+    "input_tokens": 9214,
+    "output_tokens": 378,
+    "requests": 5,
+    "cost_usd": 0.0037092,
+    "tool_calls": [
+      {
+        "tool": "browse_tree",
+        "args": {},
+        "pages": []
+      },
+      {
+        "tool": "browse_tree",
+        "args": {
+          "node_id": "lec02-main"
+        },
+        "pages": []
+      },
+      {
+        "tool": "browse_tree",
+        "args": {
+          "node_id": "lec02-main-s045"
+        },
+        "pages": []
+      },
+      {
+        "tool": "browse_tree",
+        "args": {
+          "node_id": "lec02-main-p052"
+        },
+        "pages": [
+          {
+            "lecture": 2,
+            "page": 52,
+            "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる"
+          }
+        ]
+      }
+    ]
+  },
+  "ex_graph": {
+    "mode": "graph",
+    "question": "第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 5,
+    "answer": "第2回の講義資料によると、LoRAとQLoRAの仕組みについて以下のように説明されています。\n\n- **LoRAが固定するものと学習するもの**\n  - **固定するもの：** 元の重み（本体）はそのまま固定し、学習しません（第2回・PDF p.52）。\n  - **学習するもの：** 変化分を表す小さな行列（低ランクの追加部分、付箋のように書き足す小さな行列）だけを学習します（第2回・PDF p.51, 52）。\n\n- **QLoRAが加えるもの**\n  - LoRAの手法に加えて、**元の重みを4bit（数値を粗く保存する形式）に圧縮する処理**を加えます（第2回・PDF p.51, 52）。これにより、さらに少ないメモリ（GPU 1台など）で大きなモデルを調整できるようになります。",
+    "seconds": 2.77,
+    "input_tokens": 5771,
+    "output_tokens": 217,
+    "requests": 2,
+    "cost_usd": 0.00172597,
+    "tool_calls": [
+      {
+        "tool": "search_graph",
+        "args": {
+          "query": "LoRA QLoRA 固定 学習"
+        },
+        "pages": [
+          {
+            "lecture": 2,
+            "page": 52,
+            "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる",
+            "distance": 0.2297,
+            "hops": 0
+          },
+          {
+            "lecture": 2,
+            "page": 51,
+            "title": "PEFT ：モデル全体ではなく、一部だけを学習する",
+            "distance": 0.2436,
+            "hops": 0
+          },
+          {
+            "lecture": 2,
+            "page": 60,
+            "title": "今日の演習： QLoRA で出力形式を矯正し、効果を測る",
+            "distance": 0.2672,
+            "hops": 0
+          },
+          {
+            "lecture": 2,
+            "page": 53,
+            "title": "チャットボットの場合：何を FT し、何を FT しないか",
+            "hops": 1
+          },
+          {
+            "lecture": 2,
+            "page": 50,
+            "title": "判断の順番：測る → 分ける → プロンプト → Fine-Tuning",
+            "hops": 1
+          },
+          {
+            "lecture": 2,
+            "page": 59,
+            "title": "第 2 回のまとめ： 4 つの芯と、明日やること",
+            "hops": 1
+          },
+          {
+            "lecture": 2,
+            "page": 61,
+            "title": "演習の進め方と提出物（仮）",
+            "hops": 1
+          },
+          {
+            "lecture": 2,
+            "page": 49,
+            "title": "FT は「コストを下げる」ためにも使う",
+            "hops": 2
+          },
+          {
+            "lecture": 2,
+            "page": 62,
+            "title": "次回： AI エージェント。今日の性質が設計の前提になる",
+            "hops": 2
+          },
+          {
+            "lecture": 2,
+            "page": 47,
+            "title": "根拠と諸説：知識の追加は RAG が効きやすい",
+            "hops": 2
+          }
+        ]
+      }
+    ]
+  },
+  "q2_vector_k5": {
+    "mode": "vector",
+    "question": "第3回の例では、コンパクションとセッションをまたぐメモリはどう違いますか。日々のメモはすべて長期メモリに入りますか",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 5,
+    "answer": "第3回の資料におけるコンパクションとセッションをまたぐメモリの違い、および日々のメモの扱いについて、講義資料に沿って整理します。\n\n### 1. コンパクションとセッションをまたぐメモリの違い\n* **コンパクション（ループの中の履歴の圧縮）**\n  * **場所と役割:** 同じセッション（コンテキストの中）で行われる処理です（第3回・PDF p.39）。\n  * **仕組み:** コンテキストの上限に達しないよう、古い履歴を要約して置き換えます（第3回・PDF p.38, 39）。ただし、要約に置き換えた範囲に含まれていた画像や文書などの詳細なデータは失われます（第3回・PDF p.65）。\n* **セッションをまたぐメモリ（外の保存先）**\n  * **場所と役割:** チャットやセッションの枠を超えて情報を引き継ぐための仕組みです（第3回・PDF p.39）。\n  * **仕組み:** ファイルやデータベースなどの外の保存先に情報を書き出し、新しいセッションの開始時に必要な情報を読み戻します（第3回・PDF p.13, 39）。\n\n---\n\n### 2. 日々のメモはすべて長期メモリに入りますか\n* 第3回のOpenClawの実装例では、日々のメモ（`memory/日付.md`）がすべてそのまま長期メモリ（`MEMORY.md`）に入るわけではありません（第3回・PDF p.40）。\n* 毎晩の自動見直し（dreaming）のプロセスを経て、以下のように取捨選択されます（第3回・PDF p.40）。\n  * 一度きりの調べものは日々のメモに残るだけで長期メモリには入りません（第3回・PDF p.40）。\n  * 何度も出てくるテーマを探すなど、基準を超えたものだけが長期メモリに残されます（第3回・PDF p.40）。\n  * すべてを蓄積すると古い情報や誤りも戻ってくるため、何を残し何を消すかの設計が必要とされています（第3回・PDF p.38, 40）。",
+    "seconds": 3.63,
+    "input_tokens": 2495,
+    "output_tokens": 499,
+    "requests": 2,
+    "cost_usd": 0.001996,
+    "tool_calls": [
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "コンパクション セッション メモリ 長期メモリ"
+        },
+        "pages": [
+          {
+            "lecture": 3,
+            "page": 65,
+            "title": "補足：メモリと Context Engineering の最新動向",
+            "distance": 0.2893
+          },
+          {
+            "lecture": 3,
+            "page": 39,
+            "title": "実装例：Claude",
+            "distance": 0.2915
+          },
+          {
+            "lecture": 3,
+            "page": 38,
+            "title": "メモリがないと、毎回ゼロからやり直しになる",
+            "distance": 0.2957
+          },
+          {
+            "lecture": 3,
+            "page": 40,
+            "title": "実装例：OpenClaw",
+            "distance": 0.3168
+          },
+          {
+            "lecture": 3,
+            "page": 13,
+            "title": "メモリ",
+            "distance": 0.3327
+          }
+        ]
+      }
+    ]
+  },
+  "q3_vector_k5": {
+    "mode": "vector",
+    "question": "今回作ったRAGの実測平均応答時間と正答率を教えてください",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 5,
+    "answer": "第1〜3回の講義資料を確認しましたが、今回作成されたRAGの実測平均応答時間や正答率に関する具体的な数値やデータは記載されていませんでした。\n\n講義資料（第2回・PDF p.13）では、LLMやRAGの評価に関して「同じ質問を複数回聞いて、ばらつきごと測る」ことの重要性や、1回試しただけでは実際の正答率は分からないことが説明されています（例として「RAGって何ですか？」を5回聞いて評価する図などが挙げられています）が、具体的な計測結果の値は資料に含まれていません（第2回・PDF p.13）。\n\nもしお手元の演習課題やノートブックなどに実測データが記載されている場合は、そちらの該当箇所をご確認ください。",
+    "seconds": 2.84,
+    "input_tokens": 3120,
+    "output_tokens": 191,
+    "requests": 2,
+    "cost_usd": 0.0014135,
+    "tool_calls": [
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "RAG 実測平均応答時間 正答率"
+        },
+        "pages": [
+          {
+            "lecture": 2,
+            "page": 13,
+            "title": "帰結①：同じ質問でも、答えは毎回変わる",
+            "distance": 0.2925
+          },
+          {
+            "lecture": 3,
+            "page": 64,
+            "title": "補足：長時間タスクの実行能力の最新動向",
+            "distance": 0.3155
+          },
+          {
+            "lecture": 3,
+            "page": 19,
+            "title": "誤差の累積",
+            "distance": 0.3301
+          },
+          {
+            "lecture": 2,
+            "page": 24,
+            "title": "事後学習の前と後：同じ質問でも、ふるまいが変わる",
+            "distance": 0.3315
+          },
+          {
+            "lecture": 2,
+            "page": 47,
+            "title": "根拠と諸説：知識の追加は RAG が効きやすい",
+            "distance": 0.3322
+          }
+        ]
+      }
+    ]
+  },
+  "hw_search_k2": {
+    "mode": "search",
+    "question": "LoRA QLoRA 違い",
+    "rag_top_k": 2,
+    "pages": [
+      {
+        "lecture": 2,
+        "page": 52,
+        "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる",
+        "distance": 0.2205
+      },
+      {
+        "lecture": 2,
+        "page": 51,
+        "title": "PEFT ：モデル全体ではなく、一部だけを学習する",
+        "distance": 0.2484
+      }
+    ]
+  },
+  "q1_vector_k2": {
+    "mode": "vector",
+    "question": "第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 2,
+    "answer": "講義資料によると、LoRAとQLoRAの仕組みは以下のようになっています。\n\n- **LoRA**\n  - **固定するもの**：元の重み（本体）は固定して学習しません（第2回・PDF p.52）。\n  - **学習するもの**：細長い2つの小さな行列（低ランクの小さな行列 A・B）による小さな「差分」だけを学習します（第2回・PDF p.52）。\n\n- **QLoRA**\n  - **加えるもの**：LoRAの手法に加え、元の重みを4bit（数値を粗く保存）に圧縮するという工夫を加えています（第2回・PDF p.51, p.52）。",
+    "seconds": 2.9,
+    "input_tokens": 1740,
+    "output_tokens": 178,
+    "requests": 2,
+    "cost_usd": 0.000967,
+    "tool_calls": [
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "LoRA QLoRA 固定 学習"
+        },
+        "pages": [
+          {
+            "lecture": 2,
+            "page": 52,
+            "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる",
+            "distance": 0.2297
+          },
+          {
+            "lecture": 2,
+            "page": 51,
+            "title": "PEFT ：モデル全体ではなく、一部だけを学習する",
+            "distance": 0.2436
+          }
+        ]
+      }
+    ]
+  },
+  "q2_vector_k2": {
+    "mode": "vector",
+    "question": "第3回の例では、コンパクションとセッションをまたぐメモリはどう違いますか。日々のメモはすべて長期メモリに入りますか",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 2,
+    "answer": "第3回の講義資料に基づき、それぞれの違いと長期メモリへの保存について解説します。\n\n### 1. コンパクションとセッションをまたぐメモリの違い\n\n* **コンパクション（コンテキストの中 / 同じセッション）**\n  * **仕組み**: 1つのセッションやループの中で、古い履歴を要約して詰める（圧縮する）機能です（第3回・PDF p.39, 65）。\n  * **目的**: コンテキスト長の上限によって途中経過が落ちてしまうのを防ぎます（第3回・PDF p.38, 39）。\n* **セッションをまたぐメモリ（外の保存先）**\n  * **仕組み**: メモリツールや自動メモリなどを用いて、ファイル等に情報を書き出し、次回のセッションや別のやり取りに持ち越す仕組みです（第3回・PDF p.39）。\n  * **目的**: セッションが終了してやり取りがリセットされた後でも、過去に決めたことや継続的な情報を次の会話の最初に読み込めるようにします（第3回・PDF p.39, 40）。\n\n---\n\n### 2. 日々のメモはすべて長期メモリに入りますか？\n\n* **すべては入りません。**\n  * 例えば OpenClaw の実装例では、日々のやり取りはまず「日々のメモ（`memory/日付.md`）」として残されます（第3回・PDF p.40）。\n  * その後、毎晩の見直し（dreaming）のプロセスを経て、**「重複を除いて候補を並べる」「何度も出てくるテーマを探す」「基準を超えたものだけ残す」**という処理が行われます（第3回・PDF p.40）。\n  * そのため、一度きりの調べものなどは日々のメモに残るだけで、すべてが長期メモリ（`MEMORY.md`）に移るわけではありません（長期メモリが膨らまないように選別されます）（第3回・PDF p.40）。",
+    "seconds": 4.66,
+    "input_tokens": 3431,
+    "output_tokens": 486,
+    "requests": 3,
+    "cost_usd": 0.0022443,
+    "tool_calls": [
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "コンパクション セッション メモリ 長期メモリ 日々のメモ"
+        },
+        "pages": [
+          {
+            "lecture": 3,
+            "page": 39,
+            "title": "実装例：Claude",
+            "distance": 0.2712
+          },
+          {
+            "lecture": 3,
+            "page": 65,
+            "title": "補足：メモリと Context Engineering の最新動向",
+            "distance": 0.2715
+          }
+        ]
+      },
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "日々のメモ 長期メモリ"
+        },
+        "pages": [
+          {
+            "lecture": 3,
+            "page": 40,
+            "title": "実装例：OpenClaw",
+            "distance": 0.2588
+          },
+          {
+            "lecture": 3,
+            "page": 38,
+            "title": "メモリがないと、毎回ゼロからやり直しになる",
+            "distance": 0.2739
+          }
+        ]
+      }
+    ]
+  },
+  "q3_vector_k2": {
+    "mode": "vector",
+    "question": "今回作ったRAGの実測平均応答時間と正答率を教えてください",
+    "model": "gemini-3.5-flash-lite",
+    "rag_top_k": 2,
+    "answer": "第1〜3回の講義資料を確認しましたが、今回作成したRAGの実測平均応答時間や正答率に関する数値は記載されていませんでした。\n\nそのため、現在の資料から正確な数値を確認することはできません（第2回資料では、LLMの出力は確率で変わるため「同じ質問を複数回聞いてばらつきごと測る」必要があることや、5回中3回正しいといった説明用の例示は記載されていますが、特定のRAG実装における実測値はありません。第2回・PDF p.13）。",
+    "seconds": 2.24,
+    "input_tokens": 1633,
+    "output_tokens": 141,
+    "requests": 2,
+    "cost_usd": 0.0008424,
+    "tool_calls": [
+      {
+        "tool": "search_materials",
+        "args": {
+          "query": "RAG 実測平均応答時間 正答率"
+        },
+        "pages": [
+          {
+            "lecture": 2,
+            "page": 13,
+            "title": "帰結①：同じ質問でも、答えは毎回変わる",
+            "distance": 0.2925
+          },
+          {
+            "lecture": 3,
+            "page": 64,
+            "title": "補足：長時間タスクの実行能力の最新動向",
+            "distance": 0.3155
+          }
+        ]
+      }
+    ]
+  }
+}
