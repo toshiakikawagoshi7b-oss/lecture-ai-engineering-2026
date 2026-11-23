@@ -1,0 +1,32 @@
+[model] gemini-3.5-flash-lite
+[mode] graph / RAG_TOP_K = 5
+[question] 第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？
+
+第2回の講義資料によると、LoRAとQLoRAの仕組みについて以下のように説明されています。
+
+- **LoRAが固定するものと学習するもの**
+  - **固定するもの：** 元の重み（本体）はそのまま固定し、学習しません（第2回・PDF p.52）。
+  - **学習するもの：** 変化分を表す小さな行列（低ランクの追加部分、付箋のように書き足す小さな行列）だけを学習します（第2回・PDF p.51, 52）。
+
+- **QLoRAが加えるもの**
+  - LoRAの手法に加えて、**元の重みを4bit（数値を粗く保存する形式）に圧縮する処理**を加えます（第2回・PDF p.51, 52）。これにより、さらに少ないメモリ（GPU 1台など）で大きなモデルを調整できるようになります。
+
+--- trace ---
+[tool call]   search_graph({'query': 'LoRA QLoRA 固定 学習'})
+[tool return] search_graph -> {"seeds": [{"page_id": "lec02-main-p052", "document_id": "lec02-main", "lecture": 2, "document_title": "基盤モデルの仕組み", "sec…
+[time] 回答完了まで 2.77 秒（検索・埋め込みを含む）
+[usage] 入力 5,771 tokens / 出力 217 tokens / モデル応答 2 回
+[cost] 生成APIの推定コスト: $0.001726 USD（埋め込み・索引構築分は含まない）
+
+--- ツールが返したページ（本文つき）---
+1. search_graph({"query": "LoRA QLoRA 固定 学習"})
+     第2回 p.52 LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる / distance=0.2297 / hops=0
+     第2回 p.51 PEFT ：モデル全体ではなく、一部だけを学習する / distance=0.2436 / hops=0
+     第2回 p.60 今日の演習： QLoRA で出力形式を矯正し、効果を測る / distance=0.2672 / hops=0
+     第2回 p.53 チャットボットの場合：何を FT し、何を FT しないか / hops=1
+     第2回 p.50 判断の順番：測る → 分ける → プロンプト → Fine-Tuning / hops=1
+     第2回 p.59 第 2 回のまとめ： 4 つの芯と、明日やること / hops=1
+     第2回 p.61 演習の進め方と提出物（仮） / hops=1
+     第2回 p.49 FT は「コストを下げる」ためにも使う / hops=2
+     第2回 p.62 次回： AI エージェント。今日の性質が設計の前提になる / hops=2
+     第2回 p.47 根拠と諸説：知識の追加は RAG が効きやすい / hops=2
